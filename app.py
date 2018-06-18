@@ -1,8 +1,14 @@
 import os
+
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
 import pandas as pd
+
+app = dash.Dash(__name__)
+server = app.server
+
+app.css.append_css({"external_url": "https://codepen.io/chriddyp/pen/bWLwgP.css"})
 
 df = pd.read_csv(
     'https://gist.githubusercontent.com/chriddyp/'
@@ -22,9 +28,6 @@ def generate_table(dataframe, max_rows=10):
         ]) for i in range(min(len(dataframe), max_rows))]
     )
 
-
-app = dash.Dash(__name__)
-server = app.server
 
 app.layout = html.Div(children=[
     html.H4(children='US Agriculture Exports (2011)'),
